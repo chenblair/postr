@@ -4496,7 +4496,10 @@ $ics = new ICS(array(
   'url' => 'blairc.com'
 ));
 
-echo $ics->to_string();
+$str = $ics->to_string();
+$handle = fopen("invite.ics", "w");
+fwrite($handle, $str);
+fclose($handle);
 
 $email->addAttachment( 'invite.ics' );
 
