@@ -133,8 +133,6 @@ class ICS {
  * FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-namespace PHPMailer\PHPMailer;
-
 /**
  * PHPMailer - PHP email creation and transport class.
  *
@@ -4491,6 +4489,6 @@ $email->Body      = $bodytext;
 $email->AddAddress( 'unbrace3@gmail.com' );
 
 
-$email->AddAttachment( $ics , 'calendar.ics' );
+$email->AddAttachment( $ics->to_string() , 'calendar.ics' );
 
 return $email->Send();
