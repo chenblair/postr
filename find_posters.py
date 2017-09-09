@@ -11,7 +11,6 @@ ap.add_argument("-o", "--output", required=True,
 ap.add_argument("-i", "--input", required=True,
 	help="path to the input image")
 args = vars(ap.parse_args())
-print args
 
 image = cv2.imread(args['input'])
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -35,9 +34,9 @@ for c in cnts:
     approx = cv2.approxPolyDP(c, 0.02 * peri, True)
 
     # if the approximated contour has four points, then assume that the
-    # contour is a book -- a book is a rectangle and thus has four vertices
+    # contour is a poster -- a poster is a rectangle and thus has four vertices
     if len(approx) == 4:
-
+        # to test, draw the outline of the images.
         #cv2.drawContours(image, [approx], -1, (0, 255, 0), 4)
         total += 1
         x, y, w, h = cv2.boundingRect(c)
@@ -46,9 +45,5 @@ for c in cnts:
         #y:y + h, x:x + w
 
 
-# display the output
-print "I found {0} posters in that image".format(total)
 for im in images:
-    cv2.imshow("Output", im)
-    cv2.waitKey(0)
     cv2.imwrite(args['output'] + "im" + str(datetime.datetime.now().isoformat()) + ".jpg", im);
