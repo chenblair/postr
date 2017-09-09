@@ -4490,8 +4490,8 @@ header('Content-Disposition: attachment; filename=invite.ics');
 $ics = new ICS(array(
   'location' => $_POST['location'],
   'description' => $_POST['description'],
-  'dtstart' => $_POST['8:30'],
-  'dtend' => $_POST['2:30'],
+  'dtstart' => $_POST['dstart'],
+  'dtend' => $_POST['dtend'],
   'summary' => $_POST['summary'],
   'url' => $_POST['url.com']
 ));
