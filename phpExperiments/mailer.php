@@ -4484,8 +4484,20 @@ $email->FromName  = 'Your Name';
 $email->Subject   = 'Message Subject';
 $email->Body      = $bodytext;
 $email->AddAddress( 'unbrace3@gmail.com' );
+header('Content-type: text/calendar; charset=utf-8');
+header('Content-Disposition: attachment; filename=invite.ics');
 
+$ics = new ICS(array(
+  'location' => $_POST['location'],
+  'description' => $_POST['description'],
+  'dtstart' => $_POST['8:30'],
+  'dtend' => $_POST['2:30'],
+  'summary' => $_POST['summary'],
+  'url' => $_POST['url.com']
+));
 
-$email->AddAttachment( $ics->to_string() , 'calendar.ics' );
+echo $ics->to_string();
+
+$email->addAttachment( 'invite.ics' );
 
 return $email->Send();
