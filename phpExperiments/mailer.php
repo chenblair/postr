@@ -4488,12 +4488,12 @@ header('Content-type: text/calendar; charset=utf-8');
 header('Content-Disposition: attachment; filename=invite.ics');
 
 $ics = new ICS(array(
-  'location' => $_POST['location'],
-  'description' => $_POST['description'],
-  'dtstart' => $_POST['dstart'],
-  'dtend' => $_POST['dtend'],
-  'summary' => $_POST['summary'],
-  'url' => $_POST['url.com']
+  'location' => 'sdfsdf',
+  'description' => 'dafsdaf',
+  'dtstart' => '8:30',
+  'dtend' => '10:30',
+  'summary' => 'summary',
+  'url' => 'blairc.com'
 ));
 
 echo $ics->to_string();
