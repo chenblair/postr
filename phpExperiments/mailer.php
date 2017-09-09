@@ -4472,9 +4472,6 @@ class PHPMailer
     }
 }
 
-set_include_path('src');
-include 'ICS.php';
-
 $properties = array(
   'dtstart' => 'now',
   'dtend' => 'now + 30 minutes'
