@@ -26,9 +26,7 @@ for ($i = 0; $i < count($filesInOutput); $i++) {
     if (strcmp($filesInOutput[$i], ".") == 0) {
         unset($filesInOutput[$i]);
         $i--;
-    }
-
-    if (strcmp($filesInOutput[$i], "..") == 0) {
+    } else if (strcmp($filesInOutput[$i], "..") == 0) {
         unset($filesInOutput[$i]);
         $i--;
     }
@@ -85,6 +83,10 @@ fclose($fp);
 //$jsonOutput = json_encode($outputBody);
 //echo $jsonOutput;
 
+if (count($outputBody) == 0) {
+   return;
+}
+
 $email = new PHPMailer();
 $bodytext = "You have received a new event!";
 $email->From = 'wallcal@wallcal.com';
@@ -100,7 +102,6 @@ if (!file_exists($icsDir)) {
    mkdir($icsDir);
 }
 
-var_dump($outputBody);
 for ($i = 0; $i < count($outputBody); $i++) {
     $body = $outputBody[$i];
     $components = explode(" ", $body["time"]);
@@ -130,7 +131,7 @@ for ($i = 0; $i < count($outputBody); $i++) {
     $p = date_parse($end);
     $et = date('H:i', strtotime($p['hour'] . ':' . $t['minute']));
 
-    $ics = new ICS(array('dtstart' => $st, 'dtend' => $et, 'description' => $body["desc"]));
+    $ics = new ICS(array('dtstart' => $st, 'dtend' => $et, 'description' => $body["desc"], 'summary' => 'WallCall Event'));
     $sICS = $ics->to_string();
     $sICSPath = $icsDir . uniqid() . ".ics";
     $handle = fopen($sICSPath, "w");
